@@ -1,6 +1,6 @@
 language: ruby
 build_image: 
-  name: shippableimages/ubuntu1204_ruby:0.0.1
+  name: shippableimages/ubuntu1204_ruby
   net: host
   privileged: true
 
