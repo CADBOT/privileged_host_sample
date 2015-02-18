@@ -7,13 +7,8 @@ rvm:
 - 2.1.1
 env:
 - CI_REPORTS=shippable/testresults COVERAGE_REPORTS=shippable/codecoverage
-before_install:
-- source ~/.rvm/scripts/rvm
-- rvm install $SHIPPABLE_RUBY --verify-downloads 1
-- source ~/.bashrc && ~/.rvm/scripts/rvm && rvm use $SHIPPABLE_RUBY
 install:
 script:
-  - bundle
   - docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -P postgres
   - PGPASSWORD=mysecretpassword psql -h localhost -p 49163 --username=postgres < seed.sql
   - PGPASSWORD=mysecretpassword psql -h localhost -p 49163 --username=postgres < query.sql
