@@ -1,6 +1,6 @@
 language: ruby
 build_image: 
-  name: shippableimages/ubuntu1204_ruby
+  name: jpetazzo/dind
   privileged: true
 
 rvm:
@@ -14,11 +14,6 @@ before_install:
 install:
 script:
   - bundle
-  - apt-get install -y postgresql postgresql-contrib curl
-  - apt-get update -qq 
-  - apt-get install -qqy apt-transport-https ca-certificates curl lxc iptables
-  
-  - curl -sSL https://get.docker.com/ubuntu/ | sh
-  - DOCKER_TLS=no docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -P postgres
+  - docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -P postgres
   - PGPASSWORD=mysecretpassword psql -h localhost -p 49163 --username=postgres < seed.sql
   - PGPASSWORD=mysecretpassword psql -h localhost -p 49163 --username=postgres < query.sql
