@@ -14,3 +14,4 @@ before_install:
 - source ~/.bashrc && ~/.rvm/scripts/rvm && rvm use $SHIPPABLE_RUBY
 install:
 script:
+- bundle
