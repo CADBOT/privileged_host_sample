@@ -1,7 +1,6 @@
 language: ruby
 build_image: 
   name: shippableimages/ubuntu1204_ruby
-  privileged: true
 
 rvm:
 - 2.1.1
@@ -16,6 +15,6 @@ script:
   - bundle
   - apt-get install -y postgresql postgresql-contrib curl
   - curl -sSL https://get.docker.com/ubuntu/ | sh
-  - sudo docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -P postgres
+  - docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -P postgres
   - PGPASSWORD=mysecretpassword psql -h localhost -p 49163 --username=postgres < seed.sql
   - PGPASSWORD=mysecretpassword psql -h localhost -p 49163 --username=postgres < query.sql
