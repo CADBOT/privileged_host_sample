@@ -14,7 +14,7 @@ before_install:
 install:
 script:
   - bundle
-  - apt-get install postgresql postgresql-contrib curl
+  - apt-get install -y postgresql postgresql-contrib curl
   - curl -sSL https://get.docker.com/ubuntu/ | sh
   - docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d -P postgres
   - PGPASSWORD=mysecretpassword psql -h localhost -p 49163 --username=postgres < seed.sql
